@@ -1,7 +1,8 @@
-package tarea05;
+package mvo.modelo.dominio;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import utilidades.Entrada;
 
 public class Turismo {

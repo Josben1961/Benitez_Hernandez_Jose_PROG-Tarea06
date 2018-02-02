@@ -1,4 +1,4 @@
-package tarea05;
+package mvo.modelo.dominio;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

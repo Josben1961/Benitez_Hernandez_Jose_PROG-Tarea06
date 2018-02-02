@@ -1,4 +1,4 @@
-package tarea05;
+package mvo.modelo.dominio;
 
 public class ExcepcionAlquilerVehiculos extends RuntimeException {
 	

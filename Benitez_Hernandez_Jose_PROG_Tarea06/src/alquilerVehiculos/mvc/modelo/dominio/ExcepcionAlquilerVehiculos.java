@@ -1,4 +1,4 @@
-package mvo.modelo.dominio;
+package alquilerVehiculos.mvc.modelo.dominio;
 
 public class ExcepcionAlquilerVehiculos extends RuntimeException {
 	

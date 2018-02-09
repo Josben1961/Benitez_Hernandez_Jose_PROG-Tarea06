@@ -1,4 +1,4 @@
-package mvo.modelo.dominio;
+package alquilerVehiculos.mvc.modelo.dominio;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,44 +6,52 @@ import java.util.regex.Pattern;
 public class Cliente {
 	private String nombre;
 	private String dni;
-	private String direccion;
-	private String localidad;
-	private String codigoPostal;
+	private DireccionPostal direccionPostal;
 	private int identificador;
+	private static int ultimoIdentificador = 0;
 	private static int numClientes=0;
-
+	
 	// Constructor con los 5 parámetros
-	public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal) {
-		this.nombre = nombre;
-		this.dni = dni;
-		this.direccion = direccion;
-		this.localidad = localidad;
-		this.codigoPostal = codigoPostal;
+	public Cliente(String nombre, String dni, DireccionPostal direccionPostal) {
+		setNombre(nombre);
+		setDni(dni);
+		setDireccionPostal(direccionPostal);
+		asignarNuevoIdentificador();
 		numClientes++;
 		identificador = numClientes;
-		// Validación DNI
-		if (compruebaDni(dni)) {
-			this.dni = dni;
-		} else {
-			throw new ExcepcionAlquilerVehiculos("El formato del DNI es erroneo");
-		}
-
-		// Validación código postal
-		if (compruebaCodigoPostal(codigoPostal)) {
-			this.codigoPostal = codigoPostal;
-		} else {
-			throw new ExcepcionAlquilerVehiculos("El formato del Código Postal es erroneo");
-		}
+				
 	}
-
+	
+	private void setNombre(String nombre) {
+		if (nombre != null && !nombre.equals(""))
+			this.nombre = nombre;
+		else 
+			throw new ExcepcionAlquilerVehiculos("Nombre no válido");
+	}
+	
+	private void setDni(String dni) {
+		if (compruebaDni(dni))
+			this.dni = dni;
+		else
+			throw new ExcepcionAlquilerVehiculos("DNI no válido");
+	}
+	
+	public void setDireccionPostal(DireccionPostal direccionPostal) {
+		this.direccionPostal = new DireccionPostal(direccionPostal);
+	}
+	
 	// Constructor copia de la clase Cliente
 	public Cliente(Cliente cliente) {
-		this.nombre = cliente.getNombre();
-		this.dni = cliente.getDni();
-		this.direccion = cliente.getDireccion();
-		this.localidad = cliente.getLocalidad();
-		this.codigoPostal = cliente.getCodigoPostal();
+		nombre = cliente.getNombre();
+		dni = cliente.getDni();
+		direccionPostal = cliente.getDireccionPostal();
+		identificador = cliente.getIdentificador();
 
+	}
+	
+	private void asignarNuevoIdentificador() {
+		ultimoIdentificador++;
+		identificador = ultimoIdentificador;
 	}
 
 	// Métodos getter de los atributos
@@ -55,30 +63,12 @@ public class Cliente {
 		return dni;
 	}
 
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public String getLocalidad() {
-		return localidad;
-	}
-
-	public String getCodigoPostal() {
-		return codigoPostal;
+	public DireccionPostal getDireccionPostal() {
+		return new DireccionPostal(direccionPostal);
 	}
 
 	public int getIdentificador() {
 		return identificador;
-	}
-
-	// Método para comprobar el código postal introducido
-	private boolean compruebaCodigoPostal(String codigoPostal) throws ExcepcionAlquilerVehiculos {
-		Pattern patron = Pattern.compile("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}");
-		Matcher emparejador;
-
-		emparejador = patron.matcher(codigoPostal);
-		return emparejador.matches();
-
 	}
 
 	// Método para comprobar el DNI introducido
@@ -94,9 +84,8 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", dni=" + dni + ", direccion=" + direccion + ", localidad=" + localidad
-				+ ", codigoPostal=" + codigoPostal + ", identificador=" + identificador + ", numClientes=" + numClientes
-				+ "]";
+		return String.format("Identificador: %d Nombre: %s DNI: %s %s", 
+				identificador, nombre, dni, direccionPostal);
 	}
 
 }

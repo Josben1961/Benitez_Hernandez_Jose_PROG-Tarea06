@@ -1,4 +1,4 @@
-package mvo.modelo.dominio;
+package alquilerVehiculos.mvc.modelo.dominio;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,11 +16,25 @@ public class Alquiler {
 
 	// Constructor con dos parámetros
 	public Alquiler(Cliente cliente, Turismo turismo) {
-		this.cliente = cliente;
-		this.turismo = turismo;
+		setCliente(cliente);
+		setTurismo(turismo);
 		fecha = new Date();
 		dias = 0;
 		turismo.setDisponible(false);
+	}
+	
+	private void setCliente(Cliente cliente) {
+		if (cliente != null)
+			this.cliente = new Cliente(cliente);
+		else
+			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
+	}
+	
+	private void setTurismo(Turismo turismo) {
+		if (turismo != null)
+			this.turismo = new Turismo(turismo);
+		else
+			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
 	}
 
 	// Métodos getters
@@ -44,7 +58,7 @@ public class Alquiler {
 		return PRECIO_DIA * getDias() + (turismo.getCilindrada() / 100);
 	}
 
-	public void close() {
+	public void cerrar() {
 		Date entrega = new Date();
 		dias = difDias(entrega, fecha);
 		if (entrega == fecha) {
@@ -61,8 +75,8 @@ public class Alquiler {
 
 	@Override
 	public String toString() {
-		return "Alquiler [cliente = " + cliente + "\n, turismo = " + turismo + "\n, fecha = " + fecha + ", dias = " + dias
-				+ ", disponible = " + disponible + " , precio= " + getPrecio()+"]\n";
+		return "Alquiler [cliente = " + cliente + "\n, turismo = " + turismo + "\n, fecha = " + fecha + ", dias = "
+				+ dias + ", disponible = " + disponible + " , precio= " + getPrecio() + "]\n";
 	}
 
 }

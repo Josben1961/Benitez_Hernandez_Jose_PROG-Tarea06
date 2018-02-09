@@ -3,7 +3,7 @@ package alquilerVehiculos.mvc.vista.utilidades;
 import alquilerVehiculos.mvc.modelo.dominio.Cliente;
 import alquilerVehiculos.mvc.modelo.dominio.DireccionPostal;
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
-import alquilerVehiculos.mvc.modelo.dominio.Turismo;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
 import alquilerVehiculos.mvc.vista.Opcion;
 
 public class Consola {
@@ -55,8 +55,8 @@ public class Consola {
 		return dniBorrar;
 	}
 
-	public static Turismo leerVehiculo(Cliente propietario) {
-		Turismo nuevoTurismo = null;
+	public static Vehiculo leerVehiculo(Cliente propietario) {
+		Vehiculo nuevoVehiculo = null;
 		System.out.print("Matrícula: ");
 		String matricula = Entrada.cadena();
 		System.out.print("Marca: ");
@@ -66,11 +66,11 @@ public class Consola {
 		System.out.print("Cilindrada: ");
 		int cilindrada = Entrada.entero();
 		try {
-			nuevoTurismo = new Turismo(matricula, marca, modelo, cilindrada);
+			nuevoVehiculo = new Vehiculo(matricula, marca, modelo, cilindrada);
 		} catch (ExcepcionAlquilerVehiculos e) {
 			System.out.printf("ERROR: %s%n%n", e.getMessage());
 		}
-		return nuevoTurismo;
+		return nuevoVehiculo;
 	}
 
 	public static String leerMatricula() {

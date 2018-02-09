@@ -3,8 +3,8 @@ package alquilerVehiculos.mvc.vista;
 import alquilerVehiculos.mvc.controlador.ControladorAlquilerVehiculos;
 import alquilerVehiculos.mvc.modelo.dominio.Cliente;
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
 import alquilerVehiculos.mvc.modelo.dominio.Alquiler;
-import alquilerVehiculos.mvc.modelo.dominio.Turismo;
 import alquilerVehiculos.mvc.vista.utilidades.Consola;
 
 public class IUTextual {
@@ -76,7 +76,7 @@ public class IUTextual {
 		Consola.mostrarCabecera("Añadir vehículo");
 		String dni = Consola.leerDni();
 		Cliente propietario = controlador.buscarCliente(dni);
-		Turismo turismo = Consola.leerVehiculo(propietario);
+		Vehiculo turismo = Consola.leerVehiculo(propietario);
 		try {
 			controlador.anadirTurismo(turismo);
 			System.out.println("Vehículo añadido satisfactoriamente\n");
@@ -99,14 +99,14 @@ public class IUTextual {
 	public void buscarVehiculo() {
 		Consola.mostrarCabecera("Buscar vehículo");
 		String matricula = Consola.leerMatricula();
-		Turismo turismoBuscado = controlador.buscarTurismo(matricula);
+		Vehiculo turismoBuscado = controlador.buscarTurismo(matricula);
 		String mensaje = (turismoBuscado != null) ? turismoBuscado.toString() : "El vehículo no existe";
 		System.out.printf("%s%n%n", mensaje);
 	}
 
 	public void listarVehiculos() {
 		Consola.mostrarCabecera("Listar vehículos");
-		for (Turismo turismo : controlador.obtenerTurismos()) {
+		for (Vehiculo turismo : controlador.obtenerTurismos()) {
 			if (turismo != null)
 				System.out.println(turismo);
 		}
@@ -117,7 +117,7 @@ public class IUTextual {
 		Consola.mostrarCabecera("Abrir trabajo");
 		String matricula = Consola.leerMatricula();
 		String dni = Consola.leerDni();
-		Turismo turismo = controlador.buscarTurismo(matricula);
+		Vehiculo turismo = controlador.buscarTurismo(matricula);
 		Cliente cliente = controlador.buscarCliente(dni);
 		if (turismo == null)
 			System.out.println("ERROR: No existe un turismo con esa matrícula\n");
@@ -134,7 +134,7 @@ public class IUTextual {
 	public void cerrarAlquiler() {
 		Consola.mostrarCabecera("Cerrar trabajo");
 		String matricula = Consola.leerMatricula();
-		Turismo turismo = controlador.buscarTurismo(matricula);
+		Vehiculo turismo = controlador.buscarTurismo(matricula);
 		String dni = Consola.leerDni();
 		Cliente cliente = controlador.buscarCliente(dni);
 		if (turismo == null)

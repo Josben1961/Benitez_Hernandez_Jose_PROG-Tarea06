@@ -28,22 +28,22 @@ public enum Opcion {
 			vista.listarClientes();
 		}
 	},
-	ANADIR_TURISMO("Añadir turismo") {
+	ANADIR_VEHICULO("Añadir vehículo") {
 		public void ejecutar() {
 			vista.anadirVehiculo();
 		}
 	},
-	BORRAR_TURISMO("Borrar turismo") {
+	BORRAR_VEHICULO("Borrar vehículo") {
 		public void ejecutar() {
 			vista.borrarVehiculo();
 		}
 	},
-	BUSCAR_TURISMO("Buscar turismo") {
+	BUSCAR_VEHICULO("Buscar vehículo") {
 		public void ejecutar() {
 			vista.buscarVehiculo();
 		}
 	},
-	LISTAR_TURISMOS("Listar turismos") {
+	LISTAR_VEHICULOS("Listar vehículos") {
 		public void ejecutar() {
 			vista.listarVehiculos();
 		}
@@ -59,7 +59,7 @@ public enum Opcion {
 		}
 	},
 
-	LISTAR_TRABAJOS("Listar trabajos") {
+	LISTAR_TRABAJOS("Listar Alquileres") {
 		public void ejecutar() {
 			vista.listarAlquileres();
 		}

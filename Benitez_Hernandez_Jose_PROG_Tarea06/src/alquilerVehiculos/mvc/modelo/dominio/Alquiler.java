@@ -3,10 +3,12 @@ package alquilerVehiculos.mvc.modelo.dominio;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
+
 public class Alquiler {
 
 	private Cliente cliente;
-	private Turismo turismo;
+	private Vehiculo vehiculo;
 	private Date fecha;
 	private int dias;
 	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -15,12 +17,12 @@ public class Alquiler {
 	private boolean disponible;
 
 	// Constructor con dos parámetros
-	public Alquiler(Cliente cliente, Turismo turismo) {
+	public Alquiler(Cliente cliente, Vehiculo vehiculo) {
 		setCliente(cliente);
-		setTurismo(turismo);
+		setVehiculo(vehiculo);
 		fecha = new Date();
 		dias = 0;
-		turismo.setDisponible(false);
+		vehiculo.setDisponible(false);
 	}
 	
 	private void setCliente(Cliente cliente) {
@@ -30,9 +32,9 @@ public class Alquiler {
 			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
 	}
 	
-	private void setTurismo(Turismo turismo) {
-		if (turismo != null)
-			this.turismo = new Turismo(turismo);
+	private void setVehiculo(Vehiculo vehiculo) {
+		if (vehiculo != null)
+			this.vehiculo = new Vehiculo(vehiculo);
 		else
 			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
 	}
@@ -42,8 +44,8 @@ public class Alquiler {
 		return cliente;
 	}
 
-	public Turismo getTurismo() {
-		return turismo;
+	public Vehiculo getVehiculo() {
+		return vehiculo;
 	}
 
 	public Date getFecha() {
@@ -55,7 +57,7 @@ public class Alquiler {
 	}
 
 	public double getPrecio() {
-		return PRECIO_DIA * getDias() + (turismo.getCilindrada() / 100);
+		return PRECIO_DIA * getDias() + (vehiculo.getCilindrada() / 100);
 	}
 
 	public void cerrar() {
@@ -75,7 +77,7 @@ public class Alquiler {
 
 	@Override
 	public String toString() {
-		return "Alquiler [cliente = " + cliente + "\n, turismo = " + turismo + "\n, fecha = " + fecha + ", dias = "
+		return "Alquiler [cliente = " + cliente + "\n, vehiculo = " + vehiculo + "\n, fecha = " + fecha + ", dias = "
 				+ dias + ", disponible = " + disponible + " , precio= " + getPrecio() + "]\n";
 	}
 

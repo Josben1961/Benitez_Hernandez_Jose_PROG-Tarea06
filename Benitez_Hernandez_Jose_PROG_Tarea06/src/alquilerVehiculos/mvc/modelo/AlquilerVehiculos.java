@@ -1,182 +1,88 @@
-package tarea05;
+package alquilerVehiculos.mvc.modelo;
+
+import alquilerVehiculos.mvc.modelo.dao.Clientes;
+import alquilerVehiculos.mvc.modelo.dao.Alquileres;
+import alquilerVehiculos.mvc.modelo.dao.Vehiculos;
+import alquilerVehiculos.mvc.modelo.dominio.Alquiler;
+import alquilerVehiculos.mvc.modelo.dominio.Cliente;
+import alquilerVehiculos.mvc.modelo.dominio.DireccionPostal;
+import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
 
 public class AlquilerVehiculos {
-	private final int MAX_TURISMOS = 100;
-	private final int MAX_CLIENTES = 100;
-	private final int MAX_ALQUILERES = 100;
+	private Clientes clientes;
+	private Vehiculos vehiculos;
+	private Alquileres alquileres;
 
-	private Turismo[] turismos;
-	private Cliente[] clientes;
-	private Alquiler[] alquileres;
-
-	// Constructor por defecto
 	public AlquilerVehiculos() {
-		turismos = new Turismo[MAX_TURISMOS];
-		clientes = new Cliente[MAX_CLIENTES];
-		alquileres = new Alquiler[MAX_ALQUILERES];
+		clientes = new Clientes();
+		vehiculos = new Vehiculos();
+		alquileres = new Alquileres();
 	}
 
-	// Métodos getters
-	public Turismo[] getTurismos() {
-		return turismos;
+	public void anadirCliente(Cliente cliente) {
+		clientes.anadirCliente(cliente);
 	}
 
-	public Cliente[] getClientes() {
-		return clientes;
+	public void borrarCliente(String dni) {
+		clientes.borrarCliente(dni);
 	}
 
-	public Alquiler[] getAlquileres() {
-		return alquileres;
+	public Cliente buscarCliente(String dni) {
+		return clientes.buscarCliente(dni);
 	}
 
-	// Método get de Cliente con un parámetro (dni) para saber si existe este
-	// cliente.
-	public Cliente getCliente(String dni) {
-		int posicion = 0;
-		boolean encontrado = false;
-		while (posicion < clientes.length && !encontrado) {
-			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
-				encontrado = true;
-			else
-				posicion++;
-		}
-		if (encontrado)
-			return clientes[posicion];
-		else
-			return null;
+	public Cliente[] obtenerClientes() {
+		return clientes.getClientes();
 	}
 
-	// Método para agregar clientes
-	public void addCliente(Cliente cliente) {
-		int posicion = 0;
-		boolean posicionEncontrada = false;
-		while (posicion < clientes.length && !posicionEncontrada) {
-			if (clientes[posicion] == null)
-				posicionEncontrada = true;
-			else if (clientes[posicion].getDni().equals(cliente.getDni()))
-				throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI");
-			else
-				posicion++;
-		}
-		if (posicionEncontrada)
-			clientes[posicion] = cliente;
-		else
-			throw new ExcepcionAlquilerVehiculos("El array de clientes está lleno.");
+	public void anadirVehiculo(Vehiculo vehiculo) {
+		vehiculos.anadirVehiculos(vehiculo);
 	}
 
-	// Método para borrar un cliente (Si existe).
-	public void delCliente(String dni) {
-		int posicion = 0;
-		boolean encontrado = false;
-		while (posicion < clientes.length && !encontrado) {
-			if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
-				encontrado = true;
-			else
-				posicion++;
-		}
-		if (encontrado) {
-			for (int i = posicion; i < clientes.length - 1; i++) {
-				clientes[i] = clientes[i + 1];
-			}
-			clientes[clientes.length - 1] = null;
-		} else {
-			throw new ExcepcionAlquilerVehiculos("El cliente a borrar no existe");
-		}
+	public void borrarVehiculo(String matricula) {
+		vehiculos.borrarVehiculo(matricula);
 	}
 
-	// Método get de Turismo con un parámetro (matricula) para saber si existe este
-	// Turismo.
-	public Turismo getTurismo(String matricula) {
-		int posicion = 0;
-		boolean encontrado = false;
-		while (posicion < turismos.length && !encontrado) {
-			if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
-				encontrado = true;
-			else
-				posicion++;
-		}
-		if (encontrado)
-			return turismos[posicion];
-		else
-			return null;
-
+	public Vehiculo buscarVehiculo(String matricula) {
+		return vehiculos.buscarVehiculo(matricula);
 	}
 
-	// Método para agregar turismos si se puede.
-	public void addTurismo(Turismo turismo) {
-		int posicion = 0;
-		boolean posicionEncontrada = false;
-		while (posicion < turismos.length && !posicionEncontrada) {
-			if (turismos[posicion] == null)
-				posicionEncontrada = true;
-			else if (turismos[posicion].getMatricula().equals(turismo.getMatricula()))
-				throw new ExcepcionAlquilerVehiculos("Ya existe un vehículo con esa matrícula");
-			else
-				posicion++;
-			turismo.setDisponible(true);
-		}
-		if (posicionEncontrada)
-			turismos[posicion] = turismo;
-		else
-			throw new ExcepcionAlquilerVehiculos("El array de vehículos está lleno.");
+	public Vehiculo[] obtenerVehiculos() {
+		return vehiculos.getVehiculos();
 	}
 
-	// Método para borrar un turismo si este existe y sino, lanzar excepción.
-	public void delTurismo(String matricula) {
-		int posicion = 0;
-		boolean encontrado = false;
-		while (posicion < turismos.length && !encontrado) {
-			if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
-				encontrado = true;
-			else
-				posicion++;
-		}
-		if (encontrado) {
-			for (int i = posicion; i < turismos.length - 1; i++) {
-				turismos[i] = turismos[i + 1];
-			}
-			turismos[turismos.length - 1] = null;
-		} else {
-			throw new ExcepcionAlquilerVehiculos("El vehículo a borrar no existe");
-		}
+	public void abrirAlquiler(Vehiculo vehiculo, Cliente cliente) {
+		comprobarExistenciaVehiculo(vehiculo);
+		alquileres.abrirAlquiler(vehiculo, cliente);
 	}
 
-	// Método para crear un nuevo alquiler si el turismo está disponible.
-	public void openAlquiler(Cliente cliente, Turismo turismo) {
-		int posicion = 0;
-		boolean posicionEncontrada = false;
-		while (posicion < alquileres.length && !posicionEncontrada) {
-			if (alquileres[posicion] == null)
-				posicionEncontrada = true;
-			else if (alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()))
-				throw new ExcepcionAlquilerVehiculos("Ya existe un alquiler abierto para este vehículo");
-			else
-				posicion++;
-			turismo.setDisponible(false);
-		}
-		if (posicionEncontrada)
-			alquileres[posicion] = new Alquiler(cliente, turismo);
-		else
-			throw new ExcepcionAlquilerVehiculos("El array de trabajos está lleno.");
+	private void comprobarExistenciaVehiculo(Vehiculo vehiculo) {
+		if (vehiculos.buscarVehiculo(vehiculo.getMatricula()) == null)
+			throw new ExcepcionAlquilerVehiculos("El vehículo no existe");
 	}
 
-	// Método para cerrar un alquiler
-	public void closeAlquiler(Cliente cliente, Turismo turismo) {
-		int posicion = 0;
-		boolean encontrado = false;
-		while (posicion < alquileres.length && !encontrado) {
-			if (alquileres[posicion] != null
-					&& alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()))
-
-				encontrado = true;
-			else
-				posicion++;
-
-		}
-		if (encontrado)
-			alquileres[posicion].close();
-		turismo.setDisponible(true);
-
-		throw new ExcepcionAlquilerVehiculos("No hay ningún alquiler abierto para ese vehículo");
+	public void cerrarAlquiler(Vehiculo vehiculo) {
+		comprobarExistenciaVehiculo(vehiculo);
+		alquileres.cerrarAlquiler(vehiculo);
 	}
+
+	public Alquiler[] obtenerAlquileres() {
+		return alquileres.getAlquileres();
+	}
+
+	public void anadirDatosPrueba() {
+		Cliente cliente1 = new Cliente("aa", "11111111A", new DireccionPostal("aa", "Almería", "04001"));
+		Cliente cliente2 = new Cliente("bb", "22222222B", new DireccionPostal("bb", "Almería", "04002"));
+		anadirCliente(cliente1);
+		anadirCliente(cliente2);
+		Vehiculo vehiculo1 = new Vehiculo("1234BBB", "Renault", "Clio", 1900);
+		Vehiculo vehiculo2 = new Vehiculo("2345BBB", "Citröen", "C4", 1600);
+		anadirVehiculo(vehiculo1);
+		anadirVehiculo(vehiculo2);
+		abrirAlquiler(vehiculo1, cliente1);
+		abrirAlquiler(vehiculo2, cliente2);
+		cerrarAlquiler(vehiculo1);
+	}
+
 }

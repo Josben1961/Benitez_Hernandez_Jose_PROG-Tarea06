@@ -3,6 +3,7 @@ package alquilerVehiculos.mvc.modelo.dominio.vehiculo;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import alquilerVehiculos.mvc.modelo.dominio.DireccionPostal;
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
 
 public class Vehiculo {
@@ -10,26 +11,40 @@ public class Vehiculo {
 	private String matricula;
 	private String marca;
 	private String modelo;
-	private int cilindrada;
 	private boolean disponible;
+	private DatosTecnicosVehiculo datosTecnicos;
+	private final  double FACTOR_CILINDRADA =0;
+	private final  double FACTOR_NUMERO_PLAZAS =0;
+	private final  double FACTOR_PMA =0;
 
 	// Constructor con cuatro parámetros
-	public Vehiculo(String matricula, String marca, String modelo, int cilindrada) {
+	public Vehiculo(String matricula, String marca, String modelo, DatosTecnicosVehiculo datosTecnicos) {
 
 		setMatricula(matricula);
 		setMarca(marca);
 		setModelo(modelo);
-		setCilindrada(cilindrada);
+		setDatosTecnicos(datosTecnicos);
 
 	}
 
 	// Constructor copia de la clase Turismo
-	public Vehiculo(Vehiculo turismo) {
-		matricula = turismo.getMatricula();
-		marca = turismo.getMarca();
-		modelo = turismo.getModelo();
-		cilindrada = turismo.getCilindrada();
+	
+	public Vehiculo(Vehiculo vehiculo) {
+		matricula = vehiculo.getMatricula();
+		marca = vehiculo.getMarca();
+		modelo = vehiculo.getModelo();
+		datosTecnicos = vehiculo.getDatosTecnicos();
 
+	}
+	
+	public void setDatosTecnicos(DatosTecnicosVehiculo datosTecnicos) {
+		// TODO Apéndice de método generado automáticamente
+		
+	}
+
+	public DatosTecnicosVehiculo getDatosTecnicos() {
+		// TODO Apéndice de método generado automáticamente
+		return null;
 	}
 
 	// Métodos getter
@@ -45,9 +60,6 @@ public class Vehiculo {
 		return modelo;
 	}
 
-	public int getCilindrada() {
-		return cilindrada;
-	}
 
 	public boolean getDisponible() {
 		return disponible;
@@ -79,12 +91,6 @@ public class Vehiculo {
 		this.disponible = disponible;
 	}
 
-	private void setCilindrada(int cilindrada) {
-		if (cilindrada > 0)
-			this.cilindrada = cilindrada;
-		else
-			throw new ExcepcionAlquilerVehiculos("Cilindrada no válida");
-	}
 
 	// Método para comprobar la matrícula introducida.
 	// Matrícula correcta: Cuatro números, espacio y tres letras mayúsculas
@@ -99,7 +105,7 @@ public class Vehiculo {
 	@Override
 	public String toString() {
 		return String.format("Matrícula: %s, Marca: %s Modelo: %s Color: %s Cilindrada: %d%n\t", matricula, marca,
-				modelo, cilindrada);
+				modelo, datosTecnicos);
 	}
 
 }

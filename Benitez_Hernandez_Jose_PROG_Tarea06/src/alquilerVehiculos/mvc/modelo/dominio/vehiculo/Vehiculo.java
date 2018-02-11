@@ -6,16 +6,16 @@ import java.util.regex.Pattern;
 import alquilerVehiculos.mvc.modelo.dominio.DireccionPostal;
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
 
-public class Vehiculo {
+public abstract class Vehiculo {
 
 	private String matricula;
 	private String marca;
 	private String modelo;
 	private boolean disponible;
 	private DatosTecnicosVehiculo datosTecnicos;
-	private final  double FACTOR_CILINDRADA =0;
-	private final  double FACTOR_NUMERO_PLAZAS =0;
-	private final  double FACTOR_PMA =0;
+	private final double FACTOR_CILINDRADA = 0;
+	private final double FACTOR_NUMERO_PLAZAS = 0;
+	private final double FACTOR_PMA = 0;
 
 	// Constructor con cuatro parámetros
 	public Vehiculo(String matricula, String marca, String modelo, DatosTecnicosVehiculo datosTecnicos) {
@@ -28,7 +28,7 @@ public class Vehiculo {
 	}
 
 	// Constructor copia de la clase Turismo
-	
+
 	public Vehiculo(Vehiculo vehiculo) {
 		matricula = vehiculo.getMatricula();
 		marca = vehiculo.getMarca();
@@ -36,10 +36,10 @@ public class Vehiculo {
 		datosTecnicos = vehiculo.getDatosTecnicos();
 
 	}
-	
+
 	public void setDatosTecnicos(DatosTecnicosVehiculo datosTecnicos) {
 		// TODO Apéndice de método generado automáticamente
-		
+
 	}
 
 	public DatosTecnicosVehiculo getDatosTecnicos() {
@@ -59,7 +59,6 @@ public class Vehiculo {
 	public String getModelo() {
 		return modelo;
 	}
-
 
 	public boolean getDisponible() {
 		return disponible;
@@ -86,11 +85,13 @@ public class Vehiculo {
 			throw new ExcepcionAlquilerVehiculos("El modelo no es válido");
 	}
 
-	// Método setter para disponible
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 
+	public abstract TipoVehiculo getTipoVehiculo();
+
+	public abstract double precioEspecifico();
 
 	// Método para comprobar la matrícula introducida.
 	// Matrícula correcta: Cuatro números, espacio y tres letras mayúsculas
@@ -104,8 +105,8 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return String.format("Matrícula: %s, Marca: %s Modelo: %s Color: %s Cilindrada: %d%n\t", matricula, marca,
-				modelo, datosTecnicos);
+		return String.format("Matrícula: %s, Marca: %s Modelo: %s Datos Técnicos: %d%n\t", matricula, marca, modelo,
+				datosTecnicos);
 	}
 
 }

@@ -7,10 +7,10 @@ public class DatosTecnicosVehiculo {
 	private int numeroPlazas;
 	private int pma;
 	
-	public DatosTecnicosVehiculo(DatosTecnicosVehiculo datosTecnicosVehiculo) {
-		cilindrada= getCilindrada();
-		numeroPlazas=getNumeroPlazas();
-		pma=getPma();
+	public DatosTecnicosVehiculo(DatosTecnicosVehiculo datosTecnicos) {
+		cilindrada= datosTecnicos.getCilindrada();
+		numeroPlazas=datosTecnicos.getNumeroPlazas();
+		pma= datosTecnicos.getPma();
 	}
 	
 	public DatosTecnicosVehiculo(int cilindrada, int numeroPlazas, int pma) {
@@ -49,9 +49,11 @@ public class DatosTecnicosVehiculo {
 
 	@Override
 	public String toString() {
-		return "DatosTecnicosVehiculo [cilindrada=" + cilindrada + ", numeroPlazas=" 
-	+ numeroPlazas + ", pma=" + pma + "]";
+		return "DatosTecnicosVehiculo [Cilindrada = " + getCilindrada() + ", NumeroPlazas = " + getNumeroPlazas()
+				+ ", Pma = " + getPma() + "]";
 	}
+
+	
 	
 	
 

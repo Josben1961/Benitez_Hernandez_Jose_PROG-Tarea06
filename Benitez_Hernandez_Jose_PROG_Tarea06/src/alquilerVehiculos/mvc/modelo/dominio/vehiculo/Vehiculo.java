@@ -38,13 +38,13 @@ public abstract class Vehiculo {
 	}
 
 	public void setDatosTecnicos(DatosTecnicosVehiculo datosTecnicos) {
-		// TODO Apéndice de método generado automáticamente
+		this.datosTecnicos = new DatosTecnicosVehiculo(datosTecnicos);
 
 	}
 
 	public DatosTecnicosVehiculo getDatosTecnicos() {
-		// TODO Apéndice de método generado automáticamente
-		return null;
+
+		return new DatosTecnicosVehiculo(datosTecnicos);
 	}
 
 	// Métodos getter
@@ -105,8 +105,9 @@ public abstract class Vehiculo {
 
 	@Override
 	public String toString() {
-		return String.format("Matrícula: %s, Marca: %s Modelo: %s Datos Técnicos: %d%n\t", matricula, marca, modelo,
-				datosTecnicos);
+		return "Vehiculo [TipoVehiculo = " + getTipoVehiculo() + ", Matricula = " + getMatricula() + ", Marca = "
+				+ getMarca() + ", Modelo = " + getModelo() + ", DatosTecnicos = " + getDatosTecnicos()
+				+ ", Disponible = " + getDisponible() + ", precioEspecifico=" + precioEspecifico() + "]";
 	}
 
 }

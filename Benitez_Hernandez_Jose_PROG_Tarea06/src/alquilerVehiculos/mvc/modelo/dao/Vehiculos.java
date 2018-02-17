@@ -1,12 +1,13 @@
 package alquilerVehiculos.mvc.modelo.dao;
 
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.TipoVehiculo;
 import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
 
 public class Vehiculos {
-	private Vehiculo[] vehiculos;
 
-	private final int MAX_VEHICULOS = 20;
+	private Vehiculo[] vehiculos;
+	private final int MAX_VEHICULOS = 100;
 
 	public Vehiculos() {
 		vehiculos = new Vehiculo[MAX_VEHICULOS];
@@ -16,11 +17,13 @@ public class Vehiculos {
 		return vehiculos.clone();
 	}
 
-	public void anadirVehiculos(Vehiculo vehiculo) {
+	public void anadirVehiculo(Vehiculo vehiculo, TipoVehiculo tipoVehiculo) {
 		int indice = buscarPrimerIndiceLibreComprobandoExistencia(vehiculo);
-		if (indiceNoSuperaTamano(indice))
-			vehiculos[indice] = new Vehiculo(vehiculo);
-		else
+		if (indiceNoSuperaTamano(indice)) {
+			vehiculos[indice] = tipoVehiculo.getInstancia(vehiculo.getMatricula(), vehiculo.getMarca(), 
+					vehiculo.getModelo(), vehiculo.getDatosTecnicos());
+
+		} else
 			throw new ExcepcionAlquilerVehiculos("El array de vehículos está lleno.");
 	}
 
@@ -43,8 +46,7 @@ public class Vehiculos {
 	}
 
 	public void borrarVehiculo(String matricula) {
-		int indice = 
-		buscarIndiceVehiculo(matricula);
+		int indice = buscarIndiceVehiculo(matricula);
 		if (indiceNoSuperaTamano(indice)) {
 			desplazarUnaPosicionHaciaIzquierda(indice);
 		} else {
@@ -61,7 +63,7 @@ public class Vehiculos {
 			else
 				indice++;
 		}
-		return indice;
+		return vehiculoEncontrado ? indice : vehiculos.length;
 	}
 
 	private void desplazarUnaPosicionHaciaIzquierda(int indice) {
@@ -72,9 +74,11 @@ public class Vehiculos {
 
 	public Vehiculo buscarVehiculo(String matricula) {
 		int indice = buscarIndiceVehiculo(matricula);
-		if (indiceNoSuperaTamano(indice))
-			return new Vehiculo(vehiculos[indice]);
-		else
+		Vehiculo vehiculo = null;
+		if (indiceNoSuperaTamano(indice)) {
+			return vehiculos[indice];
+
+		} else
 			return null;
 	}
 }

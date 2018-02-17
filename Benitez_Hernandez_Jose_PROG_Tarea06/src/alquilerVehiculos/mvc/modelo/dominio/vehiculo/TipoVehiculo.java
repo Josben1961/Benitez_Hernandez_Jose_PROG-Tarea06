@@ -1,39 +1,45 @@
 package alquilerVehiculos.mvc.modelo.dominio.vehiculo;
 
 import alquilerVehiculos.mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
-import alquilerVehiculos.mvc.vista.IUTextual;
+
 
 public enum TipoVehiculo {
 
-	SALIR("Salir") {
-		public void ejecutar() {
-			vista.salir();
+	TURISMO("Turismo") {
+
+		public Turismo getInstancia(String matricula, String marca, String modelo,
+				DatosTecnicosVehiculo datosTecnicos) {
+			return new Turismo(matricula, marca, modelo, datosTecnicos);
 		}
 
 	},
-	TURISMO("Turismo") {
+	DE_CARGA("DeCarga") {
 
-	},
-	DE_CARGA("Vehículo de Carga") {
+		public DeCarga getInstancia(String matricula, String marca, String modelo,
+				DatosTecnicosVehiculo datosTecnicos) {
+			return new DeCarga(matricula, marca, modelo, datosTecnicos);
+		}
 
 	},
 
 	AUTOBUS("Autobus") {
 
+		public Autobus getInstancia(String matricula, String marca, String modelo,
+				DatosTecnicosVehiculo datosTecnicos) {
+			return new Autobus(matricula, marca, modelo, datosTecnicos);
+		}
+
 	};
 
 	private String tipo;
-	private static IUTextual vista;
 
 	private TipoVehiculo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	public abstract Vehiculo getInstancia(String matricula, String marca, String modelo, DatosTecnicosVehiculo datosTecnicos);
 
-	public String getMensaje() {
-		return tipo;
-	}
-
-	public static TipoVehiculo getOpcionSegunOridnal(int ordinal) {
+	public static TipoVehiculo getTipoVehiculoSegunOrdinal(int ordinal) {
 		if (esOrdinalValido(ordinal))
 			return values()[ordinal];
 		else
@@ -45,7 +51,7 @@ public enum TipoVehiculo {
 	}
 
 	public String toString() {
-		return String.format("%d.- %s", ordinal(), tipo);
+		return tipo;
 	}
 
 }

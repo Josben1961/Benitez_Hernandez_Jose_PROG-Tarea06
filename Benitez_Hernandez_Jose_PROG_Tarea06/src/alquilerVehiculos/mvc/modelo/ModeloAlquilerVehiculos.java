@@ -94,23 +94,13 @@ public class ModeloAlquilerVehiculos implements IModeloAlquilerVehiculos {
 		anadirVehiculo(vehiculo4, TipoVehiculo.AUTOBUS);
 		miAlquiler.anadirVehiculo(vehiculo1, TipoVehiculo.TURISMO);
 		miAlquiler.anadirVehiculo(vehiculo2, TipoVehiculo.TURISMO);
+		miAlquiler.anadirVehiculo(vehiculo3, TipoVehiculo.DE_CARGA);
 		miAlquiler.anadirCliente(cliente1);
 		miAlquiler.anadirCliente(cliente2);
-		abrirAlquiler(vehiculo1, cliente1);
-		abrirAlquiler(vehiculo2, cliente2);
-		cerrarAlquiler(vehiculo1);
-	}
-
-	@Override
-	public void abrirAlquiler(Vehiculo vehiculo, Cliente cliente) {
-		// TODO Apéndice de método generado automáticamente
-		
-	}
-
-	@Override
-	public void cerrarAlquiler(Vehiculo vehiculo) {
-		// TODO Apéndice de método generado automáticamente
-		
+		abrirAlquiler(cliente1, vehiculo1);
+		abrirAlquiler(cliente2, vehiculo2);
+		abrirAlquiler(cliente3, vehiculo3);
+		cerrarAlquiler(cliente3, vehiculo3);
 	}
 	
 }

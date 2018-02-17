@@ -1,6 +1,7 @@
 package alquilerVehiculos.mvc.modelo.dominio.vehiculo;
 
 public class Turismo extends Vehiculo {
+	private double factorTurismo = 0.0;
 
 	public Turismo(String matricula, String marca, String modelo, DatosTecnicosVehiculo datosTecnicos) {
 		super(matricula, marca, modelo, datosTecnicos);
@@ -10,15 +11,13 @@ public class Turismo extends Vehiculo {
 		super(turismo);
 	}
 
-	@Override
 	public TipoVehiculo getTipoVehiculo() {
 		// TODO Apéndice de método generado automáticamente
-		return null;
+		return TipoVehiculo.TURISMO;
 	}
 
-	@Override
 	public double precioEspecifico() {
-		// TODO Apéndice de método generado automáticamente
-		return 0;
+		factorTurismo= datosTecnicos.getCilindrada()/50;
+		return factorTurismo;
 	}
 }

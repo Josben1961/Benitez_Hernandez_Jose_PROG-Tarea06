@@ -1,17 +1,18 @@
 package alquilerVehiculos.mvc.controlador;
 
-import alquilerVehiculos.mvc.modelo.AlquilerVehiculos;
 import alquilerVehiculos.mvc.modelo.dominio.Cliente;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.TipoVehiculo;
 import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
+import alquilerVehiculos.mvc.vista.IVistaAlquilerVehiculos;
+import alquilerVehiculos.mvc.modelo.IModeloAlquilerVehiculos;
 import alquilerVehiculos.mvc.modelo.dominio.Alquiler;
-import alquilerVehiculos.mvc.vista.IUTextual;
 
-public class ControladorAlquilerVehiculos {
+public class ControladorAlquilerVehiculos implements IControladorAlquilerVehiculos {
 
-	private AlquilerVehiculos modelo;
-	private IUTextual vista;
+	private IModeloAlquilerVehiculos modelo;
+	private alquilerVehiculos.mvc.vista.IVistaAlquilerVehiculos vista;
 
-	public ControladorAlquilerVehiculos(IUTextual vista, AlquilerVehiculos modelo) {
+	public ControladorAlquilerVehiculos(alquilerVehiculos.mvc.vista.IVistaAlquilerVehiculos vista, IModeloAlquilerVehiculos modelo) {
 		this.vista = vista;
 		this.modelo = modelo;
 		vista.setControlador(this);
@@ -38,36 +39,45 @@ public class ControladorAlquilerVehiculos {
 		return modelo.obtenerClientes();
 	}
 
-	public void anadirTurismo(Vehiculo turismo) {
-		modelo.anadirVehiculo(turismo);
+	public void anadirVehiculo(Vehiculo vehiculo, TipoVehiculo tipoVehiculo) {
+		modelo.anadirVehiculo(vehiculo, tipoVehiculo);
 	}
 
-	public void borrarTurismo(String matricula) {
+	public void borrarVehiculo(String matricula) {
 		modelo.borrarVehiculo(matricula);
 	}
 
-	public Vehiculo buscarTurismo(String matricula) {
+	public Vehiculo buscarVehiculo(String matricula) {
 		return modelo.buscarVehiculo(matricula);
 	}
 
-	public Vehiculo[] obtenerTurismos() {
+	public Vehiculo[] obtenerVehiculos() {
 		return modelo.obtenerVehiculos();
 	}
 
-	public void abrirAlquiler(Vehiculo turismo, Cliente cliente) {
-		modelo.abrirAlquiler(turismo, cliente);
+	public void abrirAlquiler( Cliente cliente, Vehiculo vehiculo) {
+		modelo.abrirAlquiler(cliente, vehiculo);
 	}
 
-	public void cerrarAlquiler(Vehiculo turismo, Cliente cliente) {
-		modelo.cerrarAlquiler(turismo);
+	public void cerrarAlquiler( Cliente cliente, Vehiculo turismo) {
+		modelo.cerrarAlquiler(cliente, turismo);
 	}
 
 	public Alquiler[] obtenerAlquileres() {
 		return modelo.obtenerAlquileres();
 	}
 
+
 	public void anadirDatosPrueba() {
-		modelo.anadirDatosPrueba();
+		
 	}
+
+	@Override
+	public void setControlador(IControladorAlquilerVehiculos controlador) {
+		// TODO Apéndice de método generado automáticamente
+		
+	}
+
+
 
 }

@@ -61,6 +61,6 @@ public class DireccionPostal {
 	}
 
 	public String toString() {
-		return String.format("Direccion: %s Localidad: %s Código Postal: %s", calle, localidad, codigoPostal);
+		return String.format("Calle: %s Localidad: %s Código Postal: %s", calle, localidad, codigoPostal);
 	}
 }

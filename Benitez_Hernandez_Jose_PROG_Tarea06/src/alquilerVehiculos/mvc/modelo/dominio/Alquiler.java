@@ -3,12 +3,16 @@ package alquilerVehiculos.mvc.modelo.dominio;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.DatosTecnicosVehiculo;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.TipoVehiculo;
+import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Turismo;
 import alquilerVehiculos.mvc.modelo.dominio.vehiculo.Vehiculo;
 
 public class Alquiler {
 
 	private Cliente cliente;
 	private Vehiculo vehiculo;
+	private DatosTecnicosVehiculo datosTecnicos;
 	private Date fecha;
 	private int dias;
 	private final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -24,19 +28,20 @@ public class Alquiler {
 		dias = 0;
 		vehiculo.setDisponible(false);
 	}
-	
+
 	private void setCliente(Cliente cliente) {
 		if (cliente != null)
 			this.cliente = new Cliente(cliente);
 		else
-			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
+			throw new ExcepcionAlquilerVehiculos("El alquiler debe tener un cliente identificado");
 	}
-	
+
 	private void setVehiculo(Vehiculo vehiculo) {
+		TipoVehiculo tipoVehiculo = null;
 		if (vehiculo != null)
-			this.vehiculo = new Vehiculo(vehiculo);
+			this.vehiculo =vehiculo;
 		else
-			throw new ExcepcionAlquilerVehiculos("El trabajo debe tener un vehículo identificado");
+			throw new ExcepcionAlquilerVehiculos("El alquiler debe tener un vehículo identificado");
 	}
 
 	// Métodos getters
@@ -55,9 +60,13 @@ public class Alquiler {
 	public int getDias() {
 		return dias;
 	}
+	public double getPrecioFijo() {
+		return PRECIO_DIA;
+	}
 
 	public double getPrecio() {
-		return PRECIO_DIA * getDias() + (vehiculo.getCilindrada() / 100);
+		
+		return PRECIO_DIA *dias;
 	}
 
 	public void cerrar() {
@@ -77,8 +86,10 @@ public class Alquiler {
 
 	@Override
 	public String toString() {
-		return "Alquiler [cliente = " + cliente + "\n, vehiculo = " + vehiculo + "\n, fecha = " + fecha + ", dias = "
-				+ dias + ", disponible = " + disponible + " , precio= " + getPrecio() + "]\n";
+		return "Alquiler [Cliente = " + getCliente() + ", Vehiculo = " + getVehiculo() + ", Fecha = "
+				+ getFecha() + ", Dias = " + getDias() + ", Precio = " + getPrecio() + "]";
 	}
+
+
 
 }

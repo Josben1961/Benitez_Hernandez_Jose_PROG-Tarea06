@@ -1,4 +1,4 @@
-package utilidades;
+package alquilerVehiculos.mvc.vista.utilidades;
 
 import java.io.BufferedReader;
 import java.io.IOException;

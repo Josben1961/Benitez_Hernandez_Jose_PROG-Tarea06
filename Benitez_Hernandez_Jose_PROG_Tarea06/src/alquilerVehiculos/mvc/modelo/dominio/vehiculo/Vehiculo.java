@@ -12,7 +12,7 @@ public abstract class Vehiculo {
 	private String marca;
 	private String modelo;
 	private boolean disponible;
-	private DatosTecnicosVehiculo datosTecnicos;
+	protected DatosTecnicosVehiculo datosTecnicos;
 	private final double FACTOR_CILINDRADA = 0;
 	private final double FACTOR_NUMERO_PLAZAS = 0;
 	private final double FACTOR_PMA = 0;

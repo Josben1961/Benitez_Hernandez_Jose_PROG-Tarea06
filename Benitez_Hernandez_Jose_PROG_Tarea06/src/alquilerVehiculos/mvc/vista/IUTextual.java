@@ -36,8 +36,8 @@ public class IUTextual implements IVistaAlquilerVehiculos {
 
 	public void anadirCliente() {
 		Consola.mostrarCabecera("Añadir cliente");
-		Cliente cliente = Consola.leerCliente();
 		try {
+			Cliente cliente = Consola.leerCliente();
 			controlador.anadirCliente(cliente);
 			System.out.println("Cliente añadido satisfactoriamente\n");
 		} catch (ExcepcionAlquilerVehiculos e) {
@@ -75,10 +75,11 @@ public class IUTextual implements IVistaAlquilerVehiculos {
 
 	public void anadirVehiculo() {
 		Consola.mostrarCabecera("Añadir vehículo");
-		Vehiculo vehiculo = Consola.leerVehiculo();
-		int ordinalTipo=Consola.elegirTipoVehiculo();
-		try {			
-			controlador.anadirVehiculo(vehiculo, TipoVehiculo.getTipoVehiculoSegunOrdinal(ordinalTipo));;
+		int ordinalTipo = Consola.elegirTipoVehiculo();
+		try {
+			Vehiculo vehiculo = Consola.leerVehiculo();
+			controlador.anadirVehiculo(vehiculo, TipoVehiculo.getTipoVehiculoSegunOrdinal(ordinalTipo));
+			;
 			System.out.println("Vehículo añadido satisfactoriamente\n");
 		} catch (ExcepcionAlquilerVehiculos e) {
 			System.out.printf("ERROR: %s%n%n", e.getMessage());

@@ -44,11 +44,7 @@ public class Consola {
 		String localidad = Entrada.cadena();
 		System.out.print("Código postal: ");
 		String codigoPostal = Entrada.cadena();
-		try {
-			cliente = new Cliente(nombre, dni, new DireccionPostal(calle, localidad, codigoPostal));
-		} catch (ExcepcionAlquilerVehiculos e) {
-			System.out.printf("ERROR: %s%n%n", e.getMessage());
-		}
+		cliente = new Cliente(nombre, dni, new DireccionPostal(calle, localidad, codigoPostal));		
 		return cliente;
 	}
 
@@ -72,14 +68,9 @@ public class Consola {
 		int numeroPlazas = Entrada.entero();
 		System.out.print("Peso máximo autorizado: ");
 		int pma = Entrada.entero();
-
-		try {
-			int ordinalTipoVehiculo = 0;
-			nuevoVehiculo = TipoVehiculo.getTipoVehiculoSegunOrdinal(ordinalTipoVehiculo).getInstancia(matricula, marca, modelo,
-					new DatosTecnicosVehiculo(cilindrada, numeroPlazas, pma));
-		} catch (ExcepcionAlquilerVehiculos e) {
-			System.out.printf("ERROR: %s%n%n", e.getMessage());
-		}
+		int ordinalTipoVehiculo = 0;
+		nuevoVehiculo = TipoVehiculo.getTipoVehiculoSegunOrdinal(ordinalTipoVehiculo).getInstancia(matricula, marca, modelo,
+		new DatosTecnicosVehiculo(cilindrada, numeroPlazas, pma));
 		return nuevoVehiculo;
 	}
 

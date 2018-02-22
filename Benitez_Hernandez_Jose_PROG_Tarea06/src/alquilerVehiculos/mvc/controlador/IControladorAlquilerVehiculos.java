@@ -33,6 +33,4 @@ public interface IControladorAlquilerVehiculos {
 
 	void anadirDatosPrueba();
 
-	void setControlador(IControladorAlquilerVehiculos controlador);
-
 }

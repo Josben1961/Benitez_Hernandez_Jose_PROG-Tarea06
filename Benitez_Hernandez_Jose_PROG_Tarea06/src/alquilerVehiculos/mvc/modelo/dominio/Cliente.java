@@ -84,7 +84,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return String.format("Identificador: %d Nombre: %s DNI: %s %s", 
+		return String.format("Identificador: %d Nombre: %s DNI: %s %s %n", 
 				identificador, nombre, dni, direccionPostal);
 	}
 

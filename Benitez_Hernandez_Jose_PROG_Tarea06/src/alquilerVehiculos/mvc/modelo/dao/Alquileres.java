@@ -29,15 +29,16 @@ public class Alquileres {
 
 	private int buscarPrimerIndiceLibreComprobandoExistenciaOtroAbierto(Vehiculo vehiculo) {
 		int indice = 0;
-		boolean trabajoEncontrado = false;
-		while (indiceNoSuperaTamano(indice) && !trabajoEncontrado) {
+		boolean alquilerEncontrado = false;
+		while (indiceNoSuperaTamano(indice) && !alquilerEncontrado) {
 			if (alquileres[indice] == null)
-				trabajoEncontrado = true;
+				alquilerEncontrado = true;
 			else if (alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
 					&& !alquileres[indice].getVehiculo().getDisponible())
 				throw new ExcepcionAlquilerVehiculos("Ya existe un alquiler abierto para este vehículo");
 			else
 				indice++;
+			vehiculo.setDisponible(false);
 		}
 		return indice;
 	}
@@ -48,25 +49,27 @@ public class Alquileres {
 
 	public void cerrarAlquiler(Cliente cliente, Vehiculo vehiculo) {
 		int indice = buscarAlquilerAbierto(cliente, vehiculo);
-		if (indiceNoSuperaTamano(indice))
+		if (indiceNoSuperaTamano(indice)) {				
 			alquileres[indice].cerrar();
-		else
+			vehiculo.setDisponible(true);
+
+		} else {
 			throw new ExcepcionAlquilerVehiculos("No hay ningún alquiler abierto para ese vehículo");
+		}
 	}
 
 	private int buscarAlquilerAbierto(Cliente cliente, Vehiculo vehiculo) {
 		int indice = 0;
-		boolean trabajoEncontrado = false;
-		while (indiceNoSuperaTamano(indice) && !trabajoEncontrado) {
-			if (alquileres[indice] != null
-					&& alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
-					&& !alquileres[indice].getVehiculo().getDisponible())
-				trabajoEncontrado = true;
-			else
+		boolean alquilerEncontrado = false;
+		while (indiceNoSuperaTamano(indice) && !alquilerEncontrado && alquileres[indice] != null) {
+			if (alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
+					&& alquileres[indice].getCliente().getDni().equals(cliente.getDni())) {
+				alquilerEncontrado = true;
+			}else {
 				indice++;
+			}
 		}
-		return indice;
+		return alquilerEncontrado ? indice : alquileres.length;
 	}
-	
 
 }

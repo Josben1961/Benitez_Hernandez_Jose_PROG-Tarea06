@@ -49,7 +49,7 @@ public class DatosTecnicosVehiculo {
 
 	@Override
 	public String toString() {
-		return "DatosTecnicosVehiculo [Cilindrada = " + getCilindrada() + ", NumeroPlazas = " + getNumeroPlazas()
+		return " [Cilindrada = " + getCilindrada() + ", NumeroPlazas = " + getNumeroPlazas()
 				+ ", Pma = " + getPma() + "]";
 	}
 

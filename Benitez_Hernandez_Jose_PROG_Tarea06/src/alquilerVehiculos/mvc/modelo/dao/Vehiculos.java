@@ -22,6 +22,7 @@ public class Vehiculos {
 		if (indiceNoSuperaTamano(indice)) {
 			vehiculos[indice] = tipoVehiculo.getInstancia(vehiculo.getMatricula(), vehiculo.getMarca(), 
 					vehiculo.getModelo(), vehiculo.getDatosTecnicos());
+			vehiculo.setDisponible(true);
 
 		} else
 			throw new ExcepcionAlquilerVehiculos("El array de vehículos está lleno.");

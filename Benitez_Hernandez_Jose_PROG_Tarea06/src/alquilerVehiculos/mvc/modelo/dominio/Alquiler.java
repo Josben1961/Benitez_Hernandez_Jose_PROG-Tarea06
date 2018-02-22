@@ -37,9 +37,8 @@ public class Alquiler {
 	}
 
 	private void setVehiculo(Vehiculo vehiculo) {
-		TipoVehiculo tipoVehiculo = null;
 		if (vehiculo != null)
-			this.vehiculo =vehiculo;
+			this.vehiculo = vehiculo;
 		else
 			throw new ExcepcionAlquilerVehiculos("El alquiler debe tener un vehículo identificado");
 	}
@@ -60,13 +59,14 @@ public class Alquiler {
 	public int getDias() {
 		return dias;
 	}
+
 	public double getPrecioFijo() {
 		return PRECIO_DIA;
 	}
 
 	public double getPrecio() {
-		
-		return PRECIO_DIA *dias;
+
+		return PRECIO_DIA * dias;
 	}
 
 	public void cerrar() {
@@ -86,10 +86,8 @@ public class Alquiler {
 
 	@Override
 	public String toString() {
-		return "Alquiler [Cliente = " + getCliente() + ", Vehiculo = " + getVehiculo() + ", Fecha = "
-				+ getFecha() + ", Dias = " + getDias() + ", Precio = " + getPrecio() + "]";
+		return "Alquiler [Cliente = " + getCliente() + " Vehiculo = " + getVehiculo() + " Fecha = " + getFecha()
+				+ ", Dias = " + getDias() + ", Precio = " + getPrecio() + "]\n\n";
 	}
-
-
 
 }

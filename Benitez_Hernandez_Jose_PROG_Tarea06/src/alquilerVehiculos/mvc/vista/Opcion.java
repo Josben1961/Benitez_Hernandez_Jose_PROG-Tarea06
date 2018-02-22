@@ -90,7 +90,7 @@ public enum Opcion {
 		if (esOrdinalValido(ordinal))
 			return values()[ordinal];
 		else
-			throw new ExcepcionAlquilerVehiculos("Ordinal de la opción no válido");
+			throw new ExcepcionAlquilerVehiculos("Opción no válida");
 	}
 
 	public static boolean esOrdinalValido(int ordinal) {

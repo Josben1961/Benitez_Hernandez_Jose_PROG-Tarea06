@@ -58,17 +58,11 @@ public class ModeloAlquilerVehiculos implements IModeloAlquilerVehiculos {
 	}
 
 	public void abrirAlquiler(Cliente cliente, Vehiculo vehiculo) {
-		comprobarExistenciaVehiculo(vehiculo);
 		alquileres.abrirAlquiler(cliente, vehiculo);
 	}
 
-	private void comprobarExistenciaVehiculo(Vehiculo vehiculo) {
-		if (vehiculos.buscarVehiculo(vehiculo.getMatricula()) == null)
-			throw new ExcepcionAlquilerVehiculos("El vehículo no existe");
-	}
-
 	public void cerrarAlquiler(Cliente cliente, Vehiculo vehiculo) {
-		comprobarExistenciaVehiculo(vehiculo);
+
 		alquileres.cerrarAlquiler(cliente, vehiculo);
 	}
 
@@ -77,7 +71,6 @@ public class ModeloAlquilerVehiculos implements IModeloAlquilerVehiculos {
 	}
 
 	public void anadirDatosPrueba() {
-		ModeloAlquilerVehiculos miAlquiler = new ModeloAlquilerVehiculos();
 		Cliente cliente1 = new Cliente("Antonio", "11111111A", new DireccionPostal("Mota", "Almería", "04001"));
 		Cliente cliente2 = new Cliente("Luis", "22222222B", new DireccionPostal("Tinaja", "Almería", "04002"));
 		Cliente cliente3 = new Cliente("José", "12345678C", new DireccionPostal("Pasaje", "Granada", "28345"));
@@ -92,15 +85,18 @@ public class ModeloAlquilerVehiculos implements IModeloAlquilerVehiculos {
 		anadirVehiculo(vehiculo2, TipoVehiculo.TURISMO);
 		anadirVehiculo(vehiculo3, TipoVehiculo.DE_CARGA);
 		anadirVehiculo(vehiculo4, TipoVehiculo.AUTOBUS);
-		miAlquiler.anadirVehiculo(vehiculo1, TipoVehiculo.TURISMO);
-		miAlquiler.anadirVehiculo(vehiculo2, TipoVehiculo.TURISMO);
-		miAlquiler.anadirVehiculo(vehiculo3, TipoVehiculo.DE_CARGA);
-		miAlquiler.anadirCliente(cliente1);
-		miAlquiler.anadirCliente(cliente2);
 		abrirAlquiler(cliente1, vehiculo1);
+		vehiculo1.setDisponible(false);
 		abrirAlquiler(cliente2, vehiculo2);
+		vehiculo2.setDisponible(false);
 		abrirAlquiler(cliente3, vehiculo3);
+		vehiculo3.setDisponible(false);
+		cerrarAlquiler(cliente1, vehiculo1);
+		vehiculo1.setDisponible(true);
+		cerrarAlquiler(cliente2, vehiculo2);
+		vehiculo2.setDisponible(true);
 		cerrarAlquiler(cliente3, vehiculo3);
+		vehiculo3.setDisponible(true);
 	}
 	
 }

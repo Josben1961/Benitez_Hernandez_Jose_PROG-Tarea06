@@ -27,7 +27,7 @@ public abstract class Vehiculo {
 
 	}
 
-	// Constructor copia de la clase Turismo
+	// Constructor copia de la clase Vehiculo
 
 	public Vehiculo(Vehiculo vehiculo) {
 		matricula = vehiculo.getMatricula();
@@ -105,9 +105,9 @@ public abstract class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [TipoVehiculo = " + getTipoVehiculo() + ", Matricula = " + getMatricula() + ", Marca = "
-				+ getMarca() + ", Modelo = " + getModelo() + ", DatosTecnicos = " + getDatosTecnicos()
-				+ ", Disponible = " + getDisponible() + ", precioEspecifico=" + precioEspecifico() + "]";
+		return " [TipoVehiculo = " + getTipoVehiculo() + ", Matricula = " + getMatricula() + ", Marca = "
+				+ getMarca() + ", Modelo = " + getModelo() + "\n DatosTecnicos = " + getDatosTecnicos()
+				+ ", Disponible = " + getDisponible() + ", precioEspecifico=" + precioEspecifico() + "]\n";
 	}
 
 }

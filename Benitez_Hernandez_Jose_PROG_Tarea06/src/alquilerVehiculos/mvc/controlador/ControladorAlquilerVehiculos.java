@@ -10,9 +10,9 @@ import alquilerVehiculos.mvc.modelo.dominio.Alquiler;
 public class ControladorAlquilerVehiculos implements IControladorAlquilerVehiculos {
 
 	private IModeloAlquilerVehiculos modelo;
-	private alquilerVehiculos.mvc.vista.IVistaAlquilerVehiculos vista;
+	private IVistaAlquilerVehiculos vista;
 
-	public ControladorAlquilerVehiculos(alquilerVehiculos.mvc.vista.IVistaAlquilerVehiculos vista, IModeloAlquilerVehiculos modelo) {
+	public ControladorAlquilerVehiculos(IVistaAlquilerVehiculos vista, IModeloAlquilerVehiculos modelo) {
 		this.vista = vista;
 		this.modelo = modelo;
 		vista.setControlador(this);
@@ -55,29 +55,21 @@ public class ControladorAlquilerVehiculos implements IControladorAlquilerVehicul
 		return modelo.obtenerVehiculos();
 	}
 
-	public void abrirAlquiler( Cliente cliente, Vehiculo vehiculo) {
+	public void abrirAlquiler(Cliente cliente, Vehiculo vehiculo) {
 		modelo.abrirAlquiler(cliente, vehiculo);
 	}
 
-	public void cerrarAlquiler( Cliente cliente, Vehiculo turismo) {
-		modelo.cerrarAlquiler(cliente, turismo);
+	public void cerrarAlquiler(Cliente cliente, Vehiculo vehiculo) {
+		modelo.cerrarAlquiler(cliente, vehiculo);
+
 	}
 
 	public Alquiler[] obtenerAlquileres() {
 		return modelo.obtenerAlquileres();
 	}
 
-
 	public void anadirDatosPrueba() {
-		
+
 	}
-
-	@Override
-	public void setControlador(IControladorAlquilerVehiculos controlador) {
-		// TODO Apéndice de método generado automáticamente
-		
-	}
-
-
 
 }

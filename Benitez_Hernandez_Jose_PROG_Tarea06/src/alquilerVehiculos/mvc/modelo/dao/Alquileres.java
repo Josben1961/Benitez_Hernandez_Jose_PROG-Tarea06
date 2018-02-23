@@ -29,16 +29,15 @@ public class Alquileres {
 
 	private int buscarPrimerIndiceLibreComprobandoExistenciaOtroAbierto(Vehiculo vehiculo) {
 		int indice = 0;
-		boolean alquilerEncontrado = false;
-		while (indiceNoSuperaTamano(indice) && !alquilerEncontrado) {
+		boolean encontrado = false;
+		while (indiceNoSuperaTamano(indice) && !encontrado) {
 			if (alquileres[indice] == null)
-				alquilerEncontrado = true;
+				encontrado = true;
 			else if (alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
 					&& !alquileres[indice].getVehiculo().getDisponible())
 				throw new ExcepcionAlquilerVehiculos("Ya existe un alquiler abierto para este vehículo");
 			else
 				indice++;
-			vehiculo.setDisponible(false);
 		}
 		return indice;
 	}
@@ -49,10 +48,9 @@ public class Alquileres {
 
 	public void cerrarAlquiler(Cliente cliente, Vehiculo vehiculo) {
 		int indice = buscarAlquilerAbierto(cliente, vehiculo);
-		if (indiceNoSuperaTamano(indice)) {				
+		if (indiceNoSuperaTamano(indice)) {
 			alquileres[indice].cerrar();
 			vehiculo.setDisponible(true);
-
 		} else {
 			throw new ExcepcionAlquilerVehiculos("No hay ningún alquiler abierto para ese vehículo");
 		}
@@ -61,15 +59,15 @@ public class Alquileres {
 	private int buscarAlquilerAbierto(Cliente cliente, Vehiculo vehiculo) {
 		int indice = 0;
 		boolean alquilerEncontrado = false;
-		while (indiceNoSuperaTamano(indice) && !alquilerEncontrado && alquileres[indice] != null) {
-			if (alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
-					&& alquileres[indice].getCliente().getDni().equals(cliente.getDni())) {
+		while (indiceNoSuperaTamano(indice) && !alquilerEncontrado) {
+			if (alquileres[indice] != null
+					&& alquileres[indice].getVehiculo().getMatricula().equals(vehiculo.getMatricula())
+					&& alquileres[indice].getDias() == 0)
 				alquilerEncontrado = true;
-			}else {
+			else
 				indice++;
-			}
 		}
-		return alquilerEncontrado ? indice : alquileres.length;
+		return indice;
 	}
 
 }

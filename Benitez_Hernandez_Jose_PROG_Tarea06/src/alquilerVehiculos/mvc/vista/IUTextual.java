@@ -125,7 +125,6 @@ public class IUTextual implements IVistaAlquilerVehiculos {
 		else {
 			try {
 				controlador.abrirAlquiler(cliente, vehiculo);
-				vehiculo.setDisponible(false);
 				System.out.println("Alquiler abierto satisfactoriamente\n");
 			} catch (ExcepcionAlquilerVehiculos e) {
 				System.out.printf("ERROR: %s%n%n", e.getMessage());
@@ -144,7 +143,6 @@ public class IUTextual implements IVistaAlquilerVehiculos {
 		else {
 			try {
 				controlador.cerrarAlquiler(cliente, vehiculo);
-				vehiculo.setDisponible(true);
 				System.out.println("Alquiler cerrado satisfactoriamente\n");
 			} catch (ExcepcionAlquilerVehiculos e) {
 				System.out.printf("ERROR: %s%n%n", e.getMessage());

@@ -75,7 +75,7 @@ public class Alquiler {
 		if (entrega == fecha) {
 			dias = 1;
 		}
-
+		vehiculo.setDisponible(true);
 	}
 
 	private int difDias(Date fechaFin, Date fechaInicio) {

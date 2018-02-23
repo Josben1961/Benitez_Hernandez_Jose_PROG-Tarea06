@@ -86,17 +86,11 @@ public class ModeloAlquilerVehiculos implements IModeloAlquilerVehiculos {
 		anadirVehiculo(vehiculo3, TipoVehiculo.DE_CARGA);
 		anadirVehiculo(vehiculo4, TipoVehiculo.AUTOBUS);
 		abrirAlquiler(cliente1, vehiculo1);
-		vehiculo1.setDisponible(false);
 		abrirAlquiler(cliente2, vehiculo2);
-		vehiculo2.setDisponible(false);
 		abrirAlquiler(cliente3, vehiculo3);
-		vehiculo3.setDisponible(false);
 		cerrarAlquiler(cliente1, vehiculo1);
-		vehiculo1.setDisponible(true);
 		cerrarAlquiler(cliente2, vehiculo2);
-		vehiculo2.setDisponible(true);
 		cerrarAlquiler(cliente3, vehiculo3);
-		vehiculo3.setDisponible(true);
 	}
 	
 }
